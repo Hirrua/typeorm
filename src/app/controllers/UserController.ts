@@ -16,6 +16,7 @@ class UserController {
         this.router.get('/:id', this.getUser)
         this.router.put('/:id', this.updateUser)
         this.router.delete('/:id', this.delteUser)
+        this.router.post('/auth', this.authenticationUser)
     }
 
     private async getAllUsers(req: Request, res: Response) {
@@ -44,6 +45,11 @@ class UserController {
         const id = parseInt(req.params.id)
         const userDelete = await UserRepository.deleteUser(id)
         res.status(201).json({ message: userDelete })
+    }
+
+    private async authenticationUser(req: Request, res: Response) {
+        const token = await UserRepository.authUser(req.body)
+        res.status(200).json(token)
     }
 }
 
