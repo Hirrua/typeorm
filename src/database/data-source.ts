@@ -4,8 +4,12 @@ import { DataSource } from "typeorm" // Metodo que vai dizer as credencias para 
 import User from "../app/entities/User"
 import { CreateUsersTable1726242370576 } from "./migrations/1726242370576-CreateUsersTable"
 import { CreateSeedUsersTable1726501538006 } from "./migrations/1726501538006-CreateSeedUsersTable"
+import { CreateProjectTable1726846806548 } from "./migrations/1726846806548-CreateProjectTable"
+import { CreateUsersProjectsTable1726846819499 } from "./migrations/1726846819499-CreateUsersProjectsTable"
 import { CreateAdressTable1726841022585 } from "./migrations/1726841022585-CreateAdressTable"
 import Address from "../app/entities/Address"
+import Project from "../app/entities/Project"
+import UserProject from "../app/entities/UserProject"
 
 dotenv.config()
 
@@ -18,7 +22,7 @@ export const AppDataSource = new DataSource({
     database: "typeorm",
     synchronize: true, // Somente usado em ambiente de desenvolvimento (true)
     logging: false,
-    entities: [User, Address],
-    migrations: [CreateUsersTable1726242370576, CreateSeedUsersTable1726501538006, CreateAdressTable1726841022585],
+    entities: [User, Address, Project, UserProject],
+    migrations: [CreateUsersTable1726242370576, CreateSeedUsersTable1726501538006, CreateAdressTable1726841022585, CreateProjectTable1726846806548,CreateUsersProjectsTable1726846819499],
     subscribers: []
 })
