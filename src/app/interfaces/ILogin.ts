@@ -4,7 +4,7 @@ interface ILogin {
 }
 
 interface ITokenData {
-    name: string
+    nome: string
     email: string
 }
 

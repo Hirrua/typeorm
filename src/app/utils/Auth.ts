@@ -1,7 +1,7 @@
 import jwt, { SignOptions } from "jsonwebtoken"
 import dotenv from "dotenv"
-import { ITokenData } from "../../interfaces/ILogin"
-import ErrorExtention from "../ErrorExtention"
+import { ITokenData } from "../interfaces/ILogin"
+import ErrorExtention from "../utils/ErrorExtention"
 
 dotenv.config()
 

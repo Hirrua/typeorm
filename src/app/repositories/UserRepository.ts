@@ -4,16 +4,17 @@ import { AppDataSource } from "../../database/data-source";
 import ErrorExtention from "../utils/ErrorExtention";
 import userShemaValidation from "../utils/validations/schemaValidation";
 import { ValidationErrorItem } from "joi";
-import bcrypt from "bcrypt"
 import { ILogin } from "../interfaces/ILogin";
 import Auth from "../utils/Auth";
+// import bcrypt from "bcrypt"
+
 
 class UserRepository {
 
     private static usersRepository = AppDataSource.getRepository(User)
 
     static async getUsers(): Promise<IUser[]> {
-        return this.usersRepository.find()
+        return this.usersRepository.find({ relations: { address: true } })
     }
 
     static async newUser(user: IUser): Promise<IUser> {
