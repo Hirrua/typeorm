@@ -14,6 +14,7 @@ class UserProjectController {
         this.router.post('/', this.createUserProject)
         this.router.put('/:id', this.updateUserProject)
         this.router.delete('/:id', this.removeUserProject)
+        this.router.post('/createAll', this.createAll)
     }
 
     private async getAllUserProjects(req: Request, res: Response) {
@@ -36,6 +37,11 @@ class UserProjectController {
         const id = parseInt(req.params.id)
         const projectDelete = await UserProjectRepository.deletUsereProject(id)
         res.status(201).json({ message: projectDelete })
+    }
+
+    private async createAll(req: Request, res: Response) {
+        const all = await UserProjectRepository.createAll(req.body)
+        res.status(201).json(all)
     }
 }
 
