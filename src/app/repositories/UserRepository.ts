@@ -6,6 +6,7 @@ import userShemaValidation from "../utils/validations/schemaValidation";
 import { ValidationErrorItem } from "joi";
 import { ILogin } from "../interfaces/ILogin";
 import Auth from "../utils/Auth";
+import IPageOptions from "../interfaces/IPages";
 // import bcrypt from "bcrypt"
 
 
@@ -13,8 +14,14 @@ class UserRepository {
 
     private static usersRepository = AppDataSource.getRepository(User)
 
-    static async getUsers(): Promise<IUser[]> {
-        return this.usersRepository.find({ relations: { address: true } })
+    static async getUsers({ pageNumber, itensPerPage, orderBy, orderDirection }: IPageOptions ): Promise<IUser[]> {
+        // Paginação (quantidade de registro por paginas)
+        return this.usersRepository.find({ 
+            skip: (pageNumber - 1) * itensPerPage,
+            take: itensPerPage,
+            order: { [orderBy]: orderDirection },
+
+            relations: { address: true } })
     }
 
     static async newUser(user: IUser): Promise<IUser> {

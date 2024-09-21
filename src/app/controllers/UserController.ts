@@ -20,7 +20,15 @@ class UserController {
     }
 
     private async getAllUsers(req: Request, res: Response) {
-        const users = await UserRepository.getUsers()
+        // Query params de forma dinamica
+        const pageNumber = parseInt(req.query.pageNumber as string) || 1
+        const itensPerPage = parseInt(req.query.itensPerPage as string) || 10
+        const orderBy = (req.query.orderBy as string) || "criado_em"
+        const orderDirection = (req.query.orderDirection as "ASC" | "DESC") || "ASC"
+
+        const options = { pageNumber, itensPerPage, orderBy, orderDirection }
+
+        const users = await UserRepository.getUsers(options)
         res.status(200).json(users)
     }
 
