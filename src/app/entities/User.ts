@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Index } from "typeorm"
 import Address from "./Address"
 import UserProject from "./UserProject"
 
@@ -10,6 +10,7 @@ class User {
     @Column('varchar', {nullable: false, length: 100})
     nome: string
 
+    @Index("email-idx", { unique: true })
     @Column('varchar', {nullable: false, length: 50, unique: true})
     email: string
 
